@@ -36,6 +36,8 @@ SecretWebServer = Function("SecretWebServer", TrafficSort, BoolSort())
 result = Const('result', Action)
 x = Const('x', TrafficSort)
 
+print "---------------------------------- Equivalent rulebases (Figure 2) --------------------------------------"
+
 r1 = HTTP(x)
 r2 = True
 rb1 = And(Implies(r1,result==Action.Drop),Implies(And(Not(r1),r2),result==Action.Drop))
@@ -45,7 +47,7 @@ rb2 = result==Action.Drop
 # print rb2, rb1.__class__.__name__
 check(rb1!=rb2)
 
-print "------------------------------------------------------------------------"
+print "---------------------------------- Equivalent rulebases (Figure 3) --------------------------------------"
 
 ruleA1 = And(SecretWebServer(x), HTTP(x))
 ruleA2 = HTTP(x)
@@ -65,7 +67,7 @@ rb2 = And(Implies(ruleB1,L1),Implies(And(Not(ruleB1),ruleB2),result==Action.Drop
 # print rb2, rb1.__class__.__name__
 check(rb1!=rb2)
 
-print "------------------------------------------------------------------------"
+print "--------------------------------- Non equivalent rulebases ---------------------------------------"
 
 ruleA1 = And(SecretWebServer(x), HTTP(x))
 ruleA2 = HTTP(x)
